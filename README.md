@@ -39,13 +39,48 @@ and the next commmand disassembles the object file world.o to produce human-read
 riscv64-unknown-elf-objdump -d world.o
 ```
 ![5](https://github.com/user-attachments/assets/0e08eb2a-3a80-4d2a-b0b6-77d99a3a7674)
-Now, we change the directory is changed to openplane flow directory.
+Now, we change the directory is changed to openplane flow directory. OpenLane is typically set up in a working directory that contains all the necessary files for physical design flows.
 ```
 cd Desktop/work/tools/openlane_working_dir/openlane
 ```
+Then we open Docker. OpenLane runs inside a Docker container to ensure a consistent environment across different systems.
+```
+docker
+```
+Then we launch the launch the interactive mode of the OpenLane toolchain.he interactive mode is particularly useful for debugging specific steps in the flow, fine-tuning parameters for individual stages, exploring the design at intermediate stages of the process.
+![6](https://github.com/user-attachments/assets/6b6b7457-b768-4379-b050-46715abe7a07)
+Then OpenLane is packaged as a Tcl module.
+```
+package require openlane 0.9
 
+```
+Next we prepare the PicoRV32 design for further processing in an FPGA or ASIC workflow.
+```
+prep -design picorv32a
+```
+![7](https://github.com/user-attachments/assets/53dad896-8ea8-4cd2-9ce3-f906dd4fcbae)
+By the following command we synthesized netlist that represents the design in terms of basic digital components such as logic gates, flip-flops, multiplexers, etc.
+```
+run_synthesis
+```
+![8](https://github.com/user-attachments/assets/dcc2a1dd-6bff-46a6-be31-08f971cc1f25)
+Floorplanning is a crucial step in the physical design flow, where the logical components are assigned specific locations on the chip or FPGA fabric. The next command initiates floorplanning.
+```
+run_floorplan
+```
+![9](https://github.com/user-attachments/assets/8aafce90-cbb3-4cd1-b025-bda0cacdac27)
 
+Next we see our Floorplan
+```
+eog designs/picorv32a/runs/13-12_07-00/results/floorplan/picorva32a.floorplan.def.png
+```
+![10](https://github.com/user-attachments/assets/62ad4be2-ceff-4688-808f-480845478138)
 
+Next we place our chips.
+```
+run_placement
+```
+We can also have a visual of our placement by the following commannd
 #include<stdio.h> int main(){ int sum = 0, i, n; printf("Enter the value of n = "); scanf("%d",&n); for(i = 1;i <= n;i++){ sum = sum + i; } printf("The Sum of numbers from 1 to %d is %d\n",n,sum); return 0; }
 
 ./a.out
