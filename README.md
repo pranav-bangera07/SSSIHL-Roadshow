@@ -85,9 +85,17 @@ We can also have a visual of our placement by the following commannd.
 eog designs/picorv32a/runs/13-12_07-00/results/placement/picorva32a.placement.def.png
 ```
 ![11](https://github.com/user-attachments/assets/85b12618-89d7-48ef-8953-d5615b95caf3)
+
 Next we do the Clock Tree Synthesis to reduce the delay and skew.
+```
+run_cts
+```
 ![12](https://github.com/user-attachments/assets/674cab43-47ed-4c57-8b56-3095e20ecc5d)
+
 Next we do the Routing where it establishes the I/O connecttions at the chip boundary pads.
+```
+run_routing
+```
 ![13](https://github.com/user-attachments/assets/7acae4cb-e6df-4573-b445-8641e99bef35)
 
 Our chip is ready!!!
